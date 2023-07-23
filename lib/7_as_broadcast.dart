@@ -1,11 +1,14 @@
 Future<void> main() async {
   final interval = Duration(seconds: 2);
   var stream = Stream<int>.periodic(interval, callback);
-  stream = stream.take(10);
+  stream = stream.asBroadcastStream();
 
   print('Início');
   stream.listen((numero) {
-    print('Listen value: $numero');
+    print('Listen 1 value: $numero');
+  });
+  stream.listen((numero) {
+    print('Listen 2 value: $numero');
   });
   print('Fim');
 }
